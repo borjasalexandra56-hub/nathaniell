@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { User, Mail, Phone, MapPin, Briefcase, GraduationCap, FileText, LogOut, Save, Edit, Building2, Globe, Star, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Briefcase, GraduationCap, FileText, LogOut, Save, Edit, Building2, Globe, Star, Calendar, Clock, ChevronDown, ChevronUp } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 const WorkerFields = ({ form, handleChange }) => (
@@ -158,14 +158,27 @@ function InfoRow({ icon: Icon, label, value, iconClass = 'text-accent' }) {
   );
 }
 
+function InfoRowInline({ entries }) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 py-2.5 border-b border-border/50">
+      {entries.map((e, i) => e.value ? (
+        <div key={i} className="flex items-center gap-1.5">
+          <e.icon className={`w-3.5 h-3.5 ${e.iconClass}`} />
+          <span className="text-sm text-foreground font-medium">{e.value}</span>
+        </div>
+      ) : null)}
+    </div>
+  );
+}
+
 function PersonalInfoSection({ profile, user, isCompany }) {
   const [open, setOpen] = useState(false);
 
-  // Compute age from birth_date
   const age = profile.birth_date ? Math.floor((new Date() - new Date(profile.birth_date)) / (365.25 * 24 * 3600 * 1000)) : null;
-  const nameParts = (user?.full_name || profile.full_name || '').split(' ');
+  const nameParts = (profile.full_name || user?.full_name || '').split(' ');
   const firstName = nameParts.slice(0, Math.ceil(nameParts.length / 2)).join(' ');
   const lastName = nameParts.slice(Math.ceil(nameParts.length / 2)).join(' ');
+  const fullAddress = [profile.address, profile.district, profile.province, profile.department].filter(Boolean).join(', ');
 
   return (
     <div className="bg-card rounded-2xl border border-border mb-3 overflow-hidden">
@@ -189,10 +202,12 @@ function PersonalInfoSection({ profile, user, isCompany }) {
           {!isCompany ? (
             <>
               <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-2 mt-1">Datos personales</p>
-              <InfoRow icon={User} label="Nombres" value={firstName} iconClass="text-primary" />
-              <InfoRow icon={User} label="Apellidos" value={lastName || null} iconClass="text-primary" />
-              <InfoRow icon={Calendar} label="Edad" value={age ? `${age} años` : null} iconClass="text-secondary" />
-              <InfoRow icon={MapPin} label="Dirección" value={[profile.address, profile.district, profile.province].filter(Boolean).join(', ') || null} iconClass="text-chart-4" />
+              <InfoRowInline entries={[
+                { icon: User, value: firstName, iconClass: 'text-primary' },
+                { icon: User, value: lastName, iconClass: 'text-primary' },
+                { icon: Calendar, value: age ? `${age} años` : null, iconClass: 'text-secondary' },
+              ]} />
+              <InfoRow icon={MapPin} label="Dirección" value={fullAddress || null} iconClass="text-chart-4" />
               <InfoRow icon={Phone} label="Teléfono" value={profile.phone} iconClass="text-muted-foreground" />
               {profile.bio && <p className="text-muted-foreground text-sm pt-3 border-t border-border mt-1">{profile.bio}</p>}
             </>
@@ -214,34 +229,39 @@ function PersonalInfoSection({ profile, user, isCompany }) {
 
 function ExperienceSection({ profile }) {
   const [open, setOpen] = useState(false);
-  const items = [
-    profile.occupation && { label: profile.occupation, sub: profile.experience_years ? `${profile.experience_years} años de experiencia` : null },
-    profile.profession && { label: profile.profession, sub: profile.education_level },
-    profile.skills && { label: 'Habilidades', sub: profile.skills },
-    profile.languages && { label: 'Idiomas', sub: profile.languages },
-  ].filter(Boolean);
+
+  const occupation = profile.occupation;
+  const experienceTime = profile.experience_years ? `${profile.experience_years} año${profile.experience_years === 1 ? '' : 's'} de experiencia` : null;
+  const profession = profile.profession;
+  const education = profile.education_level;
 
   return (
     <div className="bg-card rounded-2xl border border-border mb-3 overflow-hidden">
       <button
         className="w-full flex items-center justify-between px-5 py-4 active:bg-muted/30 transition-colors"
         onClick={() => setOpen(o => !o)}>
-        <h2 className="font-heading font-bold text-foreground text-sm">Experiencia laboral</h2>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center">
+            <Briefcase className="w-4.5 h-4.5 text-accent" />
+          </div>
+          <div className="text-left">
+            <h2 className="font-heading font-bold text-foreground text-sm">Experiencia laboral</h2>
+            <p className="text-muted-foreground text-[10px]">Ocupación, profesión y habilidades</p>
+          </div>
+        </div>
         <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <div className="divide-y divide-border border-t border-border">
-          {items.map((item, i) => (
-            <div key={i} className="flex items-center justify-between px-5 py-3">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <Briefcase className="w-4 h-4 text-accent" />
-                </div>
-                <p className="font-heading font-semibold text-foreground text-sm">{item.label}</p>
-              </div>
-              {item.sub && <span className="text-muted-foreground text-xs text-right max-w-[40%]">{item.sub}</span>}
-            </div>
-          ))}
+        <div className="px-5 pb-4 border-t border-border/50 pt-2">
+          <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-2 mt-1">Trayectoria</p>
+          <InfoRowInline entries={[
+            { icon: Briefcase, value: occupation, iconClass: 'text-accent' },
+            { icon: Clock, value: experienceTime, iconClass: 'text-secondary' },
+          ]} />
+          <InfoRow icon={GraduationCap} label="Profesión" value={profession} iconClass="text-primary" />
+          <InfoRow icon={Star} label="Nivel educativo" value={education} iconClass="text-success" />
+          <InfoRow icon={Star} label="Habilidades" value={profile.skills} iconClass="text-accent" />
+          <InfoRow icon={Globe} label="Idiomas" value={profile.languages} iconClass="text-chart-2" />
         </div>
       )}
     </div>
@@ -256,15 +276,10 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState({});
-  const [applications, setApplications] = useState([]);
 
   useEffect(() => {
     const load = async () => {
-      const [profiles, apps] = await Promise.all([
-        base44.entities.UserProfile.filter({ created_by_id: user?.id }),
-        base44.entities.JobApplication.list('-created_date', 100),
-      ]);
-      setApplications(apps);
+      const profiles = await base44.entities.UserProfile.filter({ created_by_id: user?.id });
       if (profiles.length > 0) {
         setProfile(profiles[0]);
         setForm(profiles[0]);
@@ -294,7 +309,6 @@ export default function Profile() {
 
   const isCompany = form.user_type === 'company';
   const displayName = isCompany ? (profile?.company_name || user?.full_name || 'Empresa') : (user?.full_name || 'Usuario');
-  const approvedCount = applications.filter(a => a.status === 'Aprobado').length;
 
   if (loading) return (
     <div className="flex justify-center py-20">
@@ -322,21 +336,6 @@ export default function Profile() {
             className="bg-white/20 hover:bg-white/30 transition-colors rounded-xl px-3 py-2 text-xs font-medium flex items-center gap-1.5 flex-shrink-0">
             <Edit className="w-3.5 h-3.5" /> {editing ? 'Cancelar' : 'Editar'}
           </button>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 mt-5">
-          <div className="bg-white/15 rounded-xl p-3 text-center">
-            <p className="font-heading font-bold text-xl">{applications.length}</p>
-            <p className="text-white/70 text-[10px]">Postulaciones</p>
-          </div>
-          <div className="bg-white/15 rounded-xl p-3 text-center">
-            <p className="font-heading font-bold text-xl">{approvedCount}</p>
-            <p className="text-white/70 text-[10px]">Aprobados</p>
-          </div>
-          <div className="bg-white/15 rounded-xl p-3 text-center">
-            <p className="font-heading font-bold text-xl">{isCompany ? '🏢' : '👤'}</p>
-            <p className="text-white/70 text-[10px]">{isCompany ? 'Empresa' : 'Trabajador'}</p>
-          </div>
         </div>
       </div>
 

@@ -117,11 +117,11 @@ export default function Recycling() {
 
   const mapCenter = userLocation
     ? `${userLocation.lat},${userLocation.lng}`
-    : '-11.9280,-77.0543';
+    : 'Collique, Comas, Lima, Peru';
 
   const mapSrc = selected
-    ? `https://maps.google.com/maps?q=${selected.lat},${selected.lng}&z=16&output=embed`
-    : `https://maps.google.com/maps?q=${mapCenter}&z=14&output=embed`;
+    ? `https://maps.google.com/maps?q=${encodeURIComponent(selected.address + ', Lima, Peru')}&z=16&output=embed`
+    : `https://maps.google.com/maps?q=${encodeURIComponent(mapCenter)}&z=14&output=embed`;
 
   const handleSave = (point, e) => {
     e.stopPropagation();
@@ -131,7 +131,7 @@ export default function Recycling() {
 
   const handleShare = async (point, e) => {
     e.stopPropagation();
-    const url = `https://maps.google.com/?q=${point.lat},${point.lng}`;
+    const url = `https://maps.google.com/?q=${encodeURIComponent(point.address + ', Lima, Peru')}`;
     if (navigator.share) {
       try { await navigator.share({ title: point.name, text: point.address, url }); return; } catch {}
     }
@@ -145,8 +145,9 @@ export default function Recycling() {
 
   const handleDirections = (point, e) => {
     e.stopPropagation();
+    const dest = encodeURIComponent(point.address + ', Lima, Peru');
     const origin = userLocation ? `&origin=${userLocation.lat},${userLocation.lng}` : '';
-    window.open(`https://www.google.com/maps/dir/?api=1${origin}&destination=${point.lat},${point.lng}`, '_blank');
+    window.open(`https://www.google.com/maps/dir/?api=1${origin}&destination=${dest}`, '_blank');
   };
 
   return (
