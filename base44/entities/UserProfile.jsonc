@@ -1,0 +1,119 @@
+{
+  "name": "UserProfile",
+  "type": "object",
+  "properties": {
+    "user_type": {
+      "type": "string",
+      "enum": [
+        "worker",
+        "company"
+      ]
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "dni": {
+      "type": "string"
+    },
+    "birth_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "sex": {
+      "type": "string",
+      "enum": [
+        "Masculino",
+        "Femenino",
+        "Otro"
+      ]
+    },
+    "department": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "occupation": {
+      "type": "string"
+    },
+    "profession": {
+      "type": "string"
+    },
+    "education_level": {
+      "type": "string",
+      "enum": [
+        "Primaria",
+        "Secundaria",
+        "T\u00e9cnico",
+        "Universitario",
+        "Postgrado"
+      ]
+    },
+    "experience_years": {
+      "type": "number"
+    },
+    "skills": {
+      "type": "string"
+    },
+    "languages": {
+      "type": "string"
+    },
+    "cv_url": {
+      "type": "string"
+    },
+    "photo_url": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "company_legal_name": {
+      "type": "string"
+    },
+    "ruc": {
+      "type": "string"
+    },
+    "sector": {
+      "type": "string"
+    },
+    "company_description": {
+      "type": "string"
+    },
+    "company_size": {
+      "type": "string",
+      "enum": [
+        "1-10",
+        "11-50",
+        "51-200",
+        "200+"
+      ]
+    },
+    "company_logo_url": {
+      "type": "string"
+    },
+    "company_address": {
+      "type": "string"
+    },
+    "company_website": {
+      "type": "string"
+    },
+    "contact_person": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_type"
+  ]
+}

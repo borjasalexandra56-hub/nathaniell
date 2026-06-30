@@ -1,0 +1,85 @@
+{
+  "name": "Training",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Tecnolog\u00eda",
+        "Construcci\u00f3n",
+        "Emprendimiento",
+        "Marketing",
+        "Finanzas",
+        "Educaci\u00f3n",
+        "Salud",
+        "Otro"
+      ]
+    },
+    "duration_hours": {
+      "type": "number"
+    },
+    "modality": {
+      "type": "string",
+      "enum": [
+        "Virtual",
+        "Presencial",
+        "H\u00edbrido"
+      ]
+    },
+    "rating": {
+      "type": "number"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string",
+      "enum": [
+        "Popular",
+        "Nuevo",
+        "Gratis",
+        "Certificado",
+        "Premium",
+        ""
+      ]
+    },
+    "location": {
+      "type": "string"
+    },
+    "instructor": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "closed"
+      ],
+      "default": "active"
+    },
+    "is_premium": {
+      "type": "boolean",
+      "default": false
+    },
+    "price": {
+      "type": "number"
+    },
+    "certificate_price": {
+      "type": "number"
+    },
+    "includes_certificate": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ]
+}

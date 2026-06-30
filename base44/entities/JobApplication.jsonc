@@ -1,0 +1,34 @@
+{
+  "name": "JobApplication",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string"
+    },
+    "job_title": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "En revisi\u00f3n",
+        "Entrevista",
+        "Aprobado",
+        "Rechazado",
+        "Cancelado"
+      ],
+      "default": "En revisi\u00f3n"
+    },
+    "cover_letter": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "job_id",
+    "job_title",
+    "company_name"
+  ]
+}

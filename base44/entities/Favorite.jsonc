@@ -1,0 +1,28 @@
+{
+  "name": "Favorite",
+  "type": "object",
+  "properties": {
+    "item_type": {
+      "type": "string",
+      "enum": [
+        "job",
+        "event",
+        "training"
+      ]
+    },
+    "item_id": {
+      "type": "string"
+    },
+    "item_title": {
+      "type": "string"
+    },
+    "item_company": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "item_type",
+    "item_id",
+    "item_title"
+  ]
+}

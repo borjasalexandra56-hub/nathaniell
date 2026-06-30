@@ -1,0 +1,48 @@
+{
+  "name": "CompanyPlan",
+  "type": "object",
+  "properties": {
+    "plan_type": {
+      "type": "string",
+      "enum": [
+        "free",
+        "pro",
+        "premium"
+      ],
+      "default": "free"
+    },
+    "company_user_id": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "cancelled"
+      ],
+      "default": "active"
+    },
+    "price_paid": {
+      "type": "number"
+    },
+    "payment_method": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "plan_type",
+    "company_user_id"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Certificate",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "training_id": {
+      "type": "string"
+    },
+    "training_title": {
+      "type": "string"
+    },
+    "validation_code": {
+      "type": "string"
+    },
+    "issued_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "issued",
+        "revoked"
+      ],
+      "default": "issued"
+    },
+    "purchase_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "training_id",
+    "validation_code"
+  ]
+}

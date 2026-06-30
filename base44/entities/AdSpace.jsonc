@@ -1,0 +1,65 @@
+{
+  "name": "AdSpace",
+  "type": "object",
+  "properties": {
+    "advertiser_name": {
+      "type": "string"
+    },
+    "advertiser_type": {
+      "type": "string",
+      "enum": [
+        "instituto",
+        "universidad",
+        "negocio_local",
+        "ong",
+        "otro"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "link_url": {
+      "type": "string"
+    },
+    "placement": {
+      "type": "string",
+      "enum": [
+        "dashboard",
+        "jobs",
+        "events",
+        "trainings"
+      ]
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "paused",
+        "expired"
+      ],
+      "default": "active"
+    },
+    "price_paid": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "advertiser_name",
+    "title",
+    "placement"
+  ]
+}

@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* === CIUDAD ACTIVA — LIGHT MODE === */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 220 14% 97%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    /* Azul principal #183D7C */
+    --primary: 218 67% 29%;
+    --primary-foreground: 0 0% 100%;
+    /* Naranja #F57C21 */
+    --secondary: 28 91% 54%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 0 0% 40%;
+    /* Azul secundario #1E4788 */
+    --accent: 218 63% 33%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 218 67% 29%;
+    --chart-1: 28 91% 54%;
+    --chart-2: 218 63% 33%;
+    --chart-3: 158 76% 36%;
+    --chart-4: 350 70% 55%;
+    --chart-5: 270 60% 55%;
+    --radius: 0.75rem;
+    --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --sidebar-background: 218 67% 29%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 28 91% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 218 55% 37%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 218 55% 37%;
+    --sidebar-ring: 28 91% 54%;
+    /* Verde #0FA36B */
+    --success: 158 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 40 90% 55%;
+    --warning-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    /* === CIUDAD ACTIVA — DARK MODE === */
+    /* Fondo #121826 */
+    --background: 218 38% 11%;
+    /* Fondo secundario #1B2332 */
+    --foreground: 0 0% 100%;
+    /* Tarjetas #222B3D */
+    --card: 218 30% 18%;
+    --card-foreground: 0 0% 100%;
+    --popover: 218 30% 18%;
+    --popover-foreground: 0 0% 100%;
+    /* Azul #183D7C mantenido */
+    --primary: 218 67% 29%;
+    --primary-foreground: 0 0% 100%;
+    /* Naranja #F57C21 mantenido */
+    --secondary: 28 91% 54%;
+    --secondary-foreground: 0 0% 100%;
+    /* Fondo secundario #1B2332 */
+    --muted: 218 30% 15%;
+    /* Texto secundario #C9D1D9 */
+    --muted-foreground: 210 16% 82%;
+    --accent: 218 63% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    /* Bordes #2E3A4F */
+    --border: 218 26% 25%;
+    --input: 218 26% 25%;
+    --ring: 28 91% 54%;
+    --chart-1: 28 91% 54%;
+    --chart-2: 218 63% 60%;
+    --chart-3: 158 76% 42%;
+    --chart-4: 350 70% 60%;
+    --chart-5: 270 60% 65%;
+    /* Sidebar usa fondo #121826 en dark */
+    --sidebar-background: 218 38% 9%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 28 91% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 218 30% 18%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 218 26% 20%;
+    --sidebar-ring: 28 91% 54%;
+    --success: 158 76% 42%;
+    --success-foreground: 0 0% 100%;
+    --warning: 40 90% 55%;
+    --warning-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    /* Safe area insets for notch/home indicator */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* Prevent horizontal overflow on all Android/iOS */
+    overflow-x: hidden;
+    width: 100%;
+  }
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  /* Smooth theme transition */
+  *, *::before, *::after {
+    transition: background-color 0.35s ease, border-color 0.35s ease, color 0.2s ease;
+  }
+  /* But keep animations snappy */
+  .animate-spin, .animate-pulse, [class*='animate-'] {
+    transition: none !important;
+  }
+  /* Touch targets minimum for accessibility — only standalone interactive controls */
+  button:not([class*="p-"]):not([class*="px-"]):not([class*="py-"]),
+  [role="button"] {
+    min-height: 44px;
+  }
+  /* Disable text selection on UI elements */
+  button, nav, header {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  /* Remove tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  /* Safe area padding utilities */
+  .pb-safe {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  .pt-safe {
+    padding-top: max(0px, env(safe-area-inset-top));
+  }
+  .bottom-safe {
+    bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}

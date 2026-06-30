@@ -1,0 +1,68 @@
+{
+  "name": "Purchase",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "product_type": {
+      "type": "string",
+      "enum": [
+        "plan_pro",
+        "plan_premium",
+        "featured_job",
+        "featured_event",
+        "training_premium",
+        "certificate",
+        "ad_space",
+        "talent_pool",
+        "institutional"
+      ]
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "PEN"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "completed",
+        "failed",
+        "refunded"
+      ],
+      "default": "pending"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "stripe",
+        "mercadopago",
+        "paypal",
+        "yape",
+        "plin",
+        "bank_transfer"
+      ]
+    },
+    "reference_id": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "product_type",
+    "amount"
+  ]
+}

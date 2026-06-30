@@ -1,0 +1,49 @@
+{
+  "name": "CommunitySupport",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Educaci\u00f3n",
+        "Salud",
+        "Alimentaci\u00f3n",
+        "Emergencias",
+        "Servicios",
+        "Donaciones"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "request",
+        "offer"
+      ]
+    },
+    "author_name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "resolved"
+      ],
+      "default": "active"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "type"
+  ]
+}
