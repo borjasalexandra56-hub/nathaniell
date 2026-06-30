@@ -67,7 +67,7 @@ export default function Settings() {
         <div className="bg-card border border-border rounded-2xl p-5 mb-5">
           <h2 className="font-heading font-bold text-foreground mb-1">Apariencia</h2>
           <p className="text-muted-foreground text-xs mb-4">Elige cómo ver la aplicación</p>
-          <div className="space-y-2">
+          <div className="grid grid-cols-3 gap-2">
             {THEME_OPTIONS.map(opt => {
               const Icon = opt.icon;
               const active = theme === opt.key;
@@ -77,18 +77,14 @@ export default function Settings() {
                   onClick={() => setTheme(opt.key)}
                   aria-label={`Tema ${opt.label}`}
                   aria-pressed={active}
-                  className={`w-full flex items-center gap-3 p-3 rounded-xl border-2 text-left transition-all duration-200 ${
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 text-center transition-all duration-200 ${
                     active ? 'border-secondary bg-secondary/5' : 'border-border bg-transparent hover:bg-muted/50'
                   }`}
                 >
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${active ? 'bg-secondary text-white' : 'bg-muted text-muted-foreground'}`}>
                     <Icon className="w-4 h-4" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-heading font-semibold text-foreground text-sm">{opt.emoji} {opt.label}</p>
-                    <p className="text-muted-foreground text-xs">{opt.desc}</p>
-                  </div>
-                  {active && <Check className="w-4 h-4 text-secondary flex-shrink-0" />}
+                  <p className="font-heading font-semibold text-foreground text-xs">{opt.label}</p>
                 </button>
               );
             })}
@@ -102,7 +98,6 @@ export default function Settings() {
             { to: '/notifications', icon: Bell, label: 'Notificaciones', color: 'text-secondary' },
             { to: '/privacy-policy', icon: Shield, label: 'Política de privacidad', color: 'text-success' },
             { to: '/terms', icon: FileText, label: 'Términos y condiciones', color: 'text-accent' },
-            { to: '/store-report', icon: BarChart2, label: 'Informe de publicación (Stores)', color: 'text-secondary' },
           ].map((item, i, arr) => (
             <Link key={item.to} to={item.to}
               className={`flex items-center gap-3 px-4 py-3.5 hover:bg-muted/50 transition-colors ${i < arr.length - 1 ? 'border-b border-border' : ''}`}>
@@ -157,11 +152,6 @@ export default function Settings() {
           </AlertDialog>
         </div>
 
-        {/* Version footer */}
-        <div className="mt-6 flex flex-col items-center gap-1 opacity-40">
-          <Logo size="sm" variant="bare" />
-          <p className="text-xs text-muted-foreground">Ciudad Activa v1.0 © {new Date().getFullYear()}</p>
-        </div>
       </div>
     </div>
   );

@@ -398,11 +398,6 @@ export default function Profile() {
           {!isCompany && <ExperienceSection profile={profile} />}
         </>
       )}
-
-      <Button variant="outline" onClick={() => base44.auth.logout('/welcome')}
-        className="w-full rounded-xl text-destructive border-destructive/20 hover:bg-destructive/5 font-heading font-semibold gap-2 h-11">
-        <LogOut className="w-4 h-4" /> Cerrar sesión
-      </Button>
     </div>
   );
 }

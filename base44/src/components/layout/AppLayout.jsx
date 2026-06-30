@@ -150,27 +150,11 @@ export default function AppLayout() {
       {/* Main content */}
       <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
         {/* Top header — safe area top */}
-        <header className="sticky top-0 z-30 bg-card border-b border-border px-3 lg:px-6 h-12 flex items-center justify-between"
+        <header className="sticky top-0 z-30 bg-card border-b border-border px-3 lg:px-6 h-12 flex items-center"
           style={{ paddingTop: 'env(safe-area-inset-top)' }}>
-          <div className="flex items-center gap-2.5">
-            <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-foreground w-8 h-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors">
-              <Menu className="w-5 h-5" />
-            </button>
-            <div className="hidden sm:block">
-              <h2 className="font-heading font-bold text-foreground text-sm">
-                ¡Hola, {user?.full_name?.split(' ')[0] || 'Usuario'}! 👋
-              </h2>
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <Link to="/notifications" className="relative w-8 h-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors">
-              <Bell className="w-4 h-4 text-muted-foreground" />
-              {unreadCount > 0 && <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-destructive rounded-full" />}
-            </Link>
-            <Link to="/profile" className="w-7 h-7 rounded-full bg-accent flex items-center justify-center text-white font-bold text-xs">
-              {user?.full_name?.[0] || 'U'}
-            </Link>
-          </div>
+          <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-foreground w-8 h-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors">
+            <Menu className="w-5 h-5" />
+          </button>
         </header>
 
         {/* Page content — extra bottom padding for mobile safe area + bottom nav */}
